@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "numeromastic",
+    "password": null,
+    "database": "librarydb",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "numeromastic",
+    "password": null,
+    "database": "librarydb",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "numeromastic",
+    "password": null,
+    "database": "librarydb",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

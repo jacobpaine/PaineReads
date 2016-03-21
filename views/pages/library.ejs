@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <% include ../partials/header.ejs %>
+  </head>
+  <body ng-app="starter">
+    <div ng-view> 
+      <div ng-app='starter' ng-controller='HomeCtrl' class="container">
+        <h1>Angular Table Rows</h1>
+        <table class="table-striped table-bordered">
+          <thead>
+             <tr>
+               <th ng-repeat="header in tblData">{{ header }}</th>
+               
+             </tr>
+          </thead>
+          <form action="">
+            <tbody>
+              <tr id="row{{rowId}}" ng-repeat="item in books.data" ng-init="rowId = $index">
+                <td><edit-in-place value="item.author"></td>
+                <td><edit-in-place value="item.title"></td>
+                <td><edit-in-place value="item.location"></td>
+                <td><button class="btn btn-primary" ng-click="updateEntry(item.id, item)">Edit</button></td>
+                <td><button class="btn btn-primary" ng-click="deleteEntry(item.id); remove(rowId)">Remove</button></td>
+              </tr>
+            </tbody>
+          </form> 
+        </table>
+      </div>
+    </div>
+    <% include ../partials/scripts.ejs %>
+  </body>
+</html>
