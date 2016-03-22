@@ -5,7 +5,7 @@ var sequelize = new Sequelize('postgres://localhost:5432/librarydb');
 var db = require("./models/");
 var bodyParser = require("body-parser");
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 3000));
 
 app.use(express.static(__dirname + '/public'));
 
@@ -25,11 +25,10 @@ app.get('/', function(request, response) {
 		//Model.findOrCreate[[sequelize method]]
 		db.book.findAll({}).then(function(books) {
 			response.render('pages/library');
-			// response.send('pages/library', {books: books});
-			// response.end(books);
 		});
 	});
 });
+
 // This gets the current list of books in the database.
 app.get('/books', function(request, response) {
 	//Sync the database
@@ -90,20 +89,6 @@ app.put('/:id', function (req, res) {
 		})
 	})
 })
-// var gid = ...;
-// var uid = ...;
-
-// var values = { gid: gid };
-// var selector = { where: { uid: uid } };
-// myModel.update(values, selector)
-// .then(function() {
-//     // update callback
-// });
-
-
-
-
-
 
 // Films is an unfinished post for future use.
 app.post('/films', function(request, response) {

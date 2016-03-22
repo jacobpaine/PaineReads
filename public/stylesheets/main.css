@@ -4,6 +4,7 @@
 
 .edit-in-place input {
   display: none;
+  width: 100px;
 }
 
 .edit-in-place.active span {
@@ -12,4 +13,21 @@
 
 .edit-in-place.active input {
   display: inline-block;
+}
+
+th {
+	width: 45%;
+	text-align: center;
+}
+
+.sidebar {
+	border: black solid 1px;
+	margin-right: 150px;
+	margin-top: 5px;
+	margin-left: -20%;
+	text-align: center;
+}	
+
+.sidebar input {
+	margin-top: 10px;
 }
