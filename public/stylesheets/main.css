@@ -16,18 +16,65 @@
 }
 
 th {
-	width: 45%;
+	width: 33%;
 	text-align: center;
 }
 
 .sidebar {
 	border: black solid 1px;
-	margin-right: 150px;
 	margin-top: 5px;
-	margin-left: -20%;
 	text-align: center;
 }	
 
 .sidebar input {
 	margin-top: 10px;
+
+}
+
+#firstBox {
+	width: 90%;
+}
+
+#secondBox{
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+#addressBox{
+	width: 100%;
+	text-align: center;
+	border: black solid 1px;
+	margin-top: 10%;
+}
+
+#addressInput{
+	width: 100%;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.inputLabels{
+		display: inline-block;
+
+}
+
+#anyInput{
+	width:100%;
+	display: inline-block;
+}
+
+#authorInput{
+	width:100%;
+	display: inline-block;
+
+}
+
+#titleInput{
+	width:100%;
+	display: inline-block;
+
+}
+
+#locationInput{
+	width:100%;
 }

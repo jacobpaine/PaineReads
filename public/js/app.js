@@ -1,9 +1,18 @@
-var app = angular.module('starter', []);
+var app = angular.module('starter', []).config(function($sceDelegateProvider) {
+  $sceDelegateProvider.resourceUrlWhitelist([
+    // Allow same origin resource loads.
+    'self',
+    // Allow loading from our assets domain.  Notice the difference between * and **.
+    'http://10.**',
+    'http://192.168.**'
+  ]);
+});
 app.controller('HomeCtrl', ['$http', '$scope', function($http, $scope) {
   $http.get("/books")
   .then(function(response) {
   	  $scope.books = response;
 	  $scope.tblData = getData();
+
 	  	
 	  $scope.remove = function(rowId){
 	    var target = '#row' + rowId;
@@ -21,7 +30,7 @@ app.controller('HomeCtrl', ['$http', '$scope', function($http, $scope) {
 	    t += '<tr class="alert alert-success alert-dismissible">';
 	    t += '<td colspan="6">';
 	    t += '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>';
-	    t += '<strong>Done!</strong> Removed from Library Fired</td></tr>';
+	    t += '<strong>Done!</strong> This book has been permanently removed from Library</td></tr>';
 	    
 	    return t
 	  }
@@ -29,9 +38,10 @@ app.controller('HomeCtrl', ['$http', '$scope', function($http, $scope) {
 
   	$scope.deleteEntry = function(id){
 		// Id is passed in from DOM. The route is root + parameter.
-		$http.delete("/" + id)
-		.then(function(response){
-		});
+    console.log("id", id);
+  		$http.delete("/" + id)
+  		.then(function(response){
+  		});
   	}
 
   	$scope.updateEntry = function(id, updatedEntry){
@@ -44,16 +54,14 @@ app.controller('HomeCtrl', ['$http', '$scope', function($http, $scope) {
 		.error(function(){
 			console.log("Error");
 		});
-		// .then(
-	 //       function(response){
-	 //         console.log("success response from update app.js", response);
-	 //       }, 
-	 //       function(response){
-	 //         console.log("FAIL", response);
-	 //       }
-	 //    );
 	};
 }]);	
+
+app.controller('ipChanger', ['$scope', '$http', function($scope, $http) {
+// The next line is for convenience when the server address changes.
+  $scope.action = 'http://10.0.0.89:3000/books';
+}])
+
 
 app.directive( 'editInPlace', function() {
   return {

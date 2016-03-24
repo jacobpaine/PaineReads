@@ -1,7 +1,5 @@
 var express = require('express');
 var app = express();
-var Sequelize = require('sequelize');
-var sequelize = new Sequelize('postgres://localhost:5432/librarydb');
 var db = require("./models/");
 var bodyParser = require("body-parser");
 
@@ -21,7 +19,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 app.get('/', function(request, response) {
-  	sequelize.sync().then(() => {
+  	db.sequelize.sync().then(() => {
 		//Model.findOrCreate[[sequelize method]]
 		db.book.findAll({}).then(function(books) {
 			response.render('pages/library');
@@ -32,7 +30,7 @@ app.get('/', function(request, response) {
 // This gets the current list of books in the database.
 app.get('/books', function(request, response) {
 	//Sync the database
-	sequelize.sync().then(() => {
+	db.sequelize.sync().then(() => {
 		//Model.findOrCreate[[sequelize method]]
 		db.book.findAll({}).then(function(books) {
 			// console.log("books", books);
@@ -43,7 +41,7 @@ app.get('/books', function(request, response) {
 // Books is currently the main function putting items into the database. For Barcode Scanner.
 app.post('/books', function(request, response) {
 	//Sync the database
-	sequelize.sync().then(() => {
+	db.sequelize.sync().then(() => {
 		//Model.findOrCreate[[sequelize method]]
 		db.book.findOrCreate({
 			where:{
@@ -54,8 +52,7 @@ app.post('/books', function(request, response) {
 			// Caught the output of findOrCreate. Check docs.
 		}).spread(function(book, created) {
 			if (created) {
-				response.send("Book added.")
-
+				response.send("Book Added. <button onclick='window.history.back()'>Back to Library</button>")
 			} else {
 				response.send("Book already exists in library.");
 			}
@@ -75,9 +72,8 @@ app.delete('/:id', function (req, res) {
 });
 
 app.put('/:id', function (req, res) {
-	console.log("res", res);
-	console.log("REQ DOT BODY", req);
-	db.book.findOne({id:req.params.id})
+	console.log("REQ DOT PARAMS", req.params);
+	db.book.findOne({where: {id:req.params.id}})
 	.then(function(book) {
 		book.update({
   			title:req.body.title,
@@ -91,11 +87,13 @@ app.put('/:id', function (req, res) {
 })
 
 // Films is an unfinished post for future use.
-app.post('/films', function(request, response) {
-  response.render('pages/index');
-});
+// app.post('/films', function(request, response) {
+//   response.render('pages/index');
+// });
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+db.sequelize.sync().then(() => {
+	app.listen(app.get('port'), function() {
+	  console.log('Node app is running on port', app.get('port'));
+	});
 });
 
