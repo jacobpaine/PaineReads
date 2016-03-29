@@ -4,7 +4,8 @@ var fs        = require('fs');
 var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
-var sequelize = new Sequelize('postgres://localhost:5432/librarydb');
+var DATABASE_URL = process.env.DATABASE_URL || 'postgres://localhost:5432/librarydb';
+var sequelize = new Sequelize(DATABASE_URL);
 var db        = {};
 
 fs
