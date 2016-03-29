@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 app.get('/', function(request, response) {
-  	db.sequelize.sync().then(() => {
+  	db.sequelize.sync().then(function() {
 		//Model.findOrCreate[[sequelize method]]
 		db.book.findAll({}).then(function(books) {
 			response.render('pages/library');
@@ -30,7 +30,7 @@ app.get('/', function(request, response) {
 // This gets the current list of books in the database.
 app.get('/books', function(request, response) {
 	//Sync the database
-	db.sequelize.sync().then(() => {
+	db.sequelize.sync().then(function() {
 		//Model.findOrCreate[[sequelize method]]
 		db.book.findAll({}).then(function(books) {
 			// console.log("books", books);
@@ -41,7 +41,7 @@ app.get('/books', function(request, response) {
 // Books is currently the main function putting items into the database. For Barcode Scanner.
 app.post('/books', function(request, response) {
 	//Sync the database
-	db.sequelize.sync().then(() => {
+	db.sequelize.sync().then(function() {
 		//Model.findOrCreate[[sequelize method]]
 		db.book.findOrCreate({
 			where:{
@@ -91,7 +91,7 @@ app.put('/:id', function (req, res) {
 //   response.render('pages/index');
 // });
 
-db.sequelize.sync().then(() => {
+db.sequelize.sync().then(function() {
 	app.listen(app.get('port'), function() {
 	  console.log('Node app is running on port', app.get('port'));
 	});
