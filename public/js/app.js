@@ -62,7 +62,7 @@ app.controller('HomeCtrl', ['$http', '$scope', function($http, $scope) {
 
 app.controller('ipChanger', ['$scope', '$http', function($scope, $http) {
 // The next line is for convenience when the server address changes.
-  $scope.action = 'http://192.168.1.153:3000/books';
+  $scope.action = 'https://obscure-waters-34258.herokuapp.com/books';
 }])
 
 
