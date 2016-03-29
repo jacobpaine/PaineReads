@@ -7,8 +7,11 @@ var app = angular.module('starter', []).config(function($sceDelegateProvider) {
     'http://192.168.**'
   ]);
 });
+
+
 app.controller('HomeCtrl', ['$http', '$scope', function($http, $scope) {
-  $http.get("/books")
+  $http
+  .get("/books")
   .then(function(response) {
   	  $scope.books = response;
 	  $scope.tblData = getData();
@@ -59,7 +62,7 @@ app.controller('HomeCtrl', ['$http', '$scope', function($http, $scope) {
 
 app.controller('ipChanger', ['$scope', '$http', function($scope, $http) {
 // The next line is for convenience when the server address changes.
-  $scope.action = 'http://10.0.0.89:3000/books';
+  $scope.action = 'http://192.168.1.153:3000/books';
 }])
 
 

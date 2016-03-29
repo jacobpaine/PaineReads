@@ -16,10 +16,12 @@
                 <label>Title: <input id="titleInput" ng-model="search.title"></label>
                 <label>Location: <input id="locationInput" ng-model="search.location"></label>
               </div>
-              <table class="table-striped table-bordered">
-                <thead>
+              <table class="table table-striped table-bordered">
+                <thead class="thead-inverse">
                    <tr>
                      <th ng-repeat="header in tblData">{{ header }}</th>
+                     <th></th>
+                     <th></th>
                    </tr>
                 </thead>
                 <form action="">
