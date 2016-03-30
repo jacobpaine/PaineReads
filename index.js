@@ -61,7 +61,7 @@ app.post('/books', function(request, response) {
 });
 // ":" - Anything after the colon is a parameter of req. e.g. req.params.id.
 app.delete('/:id', function (req, res) {
-	db.book.findOne({id:req.params.id})
+	db.book.findOne({where: {id:req.params.id}})
 	.then(function(book) {
   		return book.destroy();
 
